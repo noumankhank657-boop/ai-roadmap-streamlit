@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Data Science Roadmap</title>
+
+<style>
+:root {
+    --bg: #0f172a;
+    --card: #020617;
+    --text: #e5e7eb;
+    --accent: #38bdf8;
+    --success: #22c55e;
+}
+
+.light {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #020617;
+    --accent: #0284c7;
+    --success: #16a34a;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+}
+
+h1, h2 {
+    color: var(--accent);
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.phase, .paid-work {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.progress-container {
+    background: #1e293b;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 25px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--success), var(--accent));
+    text-align: center;
+    color: #020617;
+    font-weight: bold;
+}
+
+.toggle {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="toggle">
+    <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+</div>
+
+<h1>🪜 AI & Data Science Roadmap</h1>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
+</div>
+
+<div class="phase">
+<h2>PHASE 1: Solid Foundation</h2>
+<label><input type="checkbox" class="task">Python mastery</label>
+<label><input type="checkbox" class="task">Pandas + NumPy</label>
+<label><input type="checkbox" class="task">Statistics basics</label>
+<label><input type="checkbox" class="task">3 mini projects</label>
+</div>
+
+<div class="phase">
+<h2>PHASE 2: Machine Learning</h2>
+<label><input type="checkbox" class="task">ML algorithms</label>
+<label><input type="checkbox" class="task">scikit-learn</label>
+<label><input type="checkbox" class="task">4 serious projects</label>
+<label><input type="checkbox" class="task">Kaggle participation</label>
+</div>
+
+<div class="phase">
+<h2>PHASE 3: AI + Deployment</h2>
+<label><input type="checkbox" class="task">Neural networks basics</label>
+<label><input type="checkbox" class="task">APIs</label>
+<label><input type="checkbox" class="task">Deploy 2 projects</label>
+<label><input type="checkbox" class="task">GitHub portfolio</label>
+</div>
+
+<div class="phase">
+<h2>PHASE 4: Paid Entry</h2>
+<label><input type="checkbox" class="task">Freelancing</label>
+<label><input type="checkbox" class="task">Internships</label>
+<label><input type="checkbox" class="task">Local businesses</label>
+<label><input type="checkbox" class="task">Remote junior roles</label>
+</div>
+
+<div class="paid-work">
+<h2>💼 Paid Work You Can Get</h2>
+<ul>
+<li>Freelance data analyst</li>
+<li>Junior ML engineer</li>
+<li>AI automation developer</li>
+<li>Business data consultant</li>
+<li>Research assistant</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+const tasks = document.querySelectorAll(".task");
+const progressBar = document.getElementById("progressBar");
+
+// Load saved progress
+tasks.forEach((task, i) => {
+    task.checked = localStorage.getItem("task" + i) === "true";
+});
+
+function updateProgress() {
+    let checked = 0;
+    tasks.forEach((task, i) => {
+        localStorage.setItem("task" + i, task.checked);
+        if (task.checked) checked++;
+    });
+    let percent = Math.round((checked / tasks.length) * 100);
+    progressBar.style.width = percent + "%";
+    progressBar.textContent = percent + "% Completed";
+}
+
+tasks.forEach(t => t.addEventListener("change", updateProgress));
+updateProgress();
+
+// Theme toggle
+function toggleTheme() {
+    document.body.classList.toggle("light");
+    localStorage.setItem("theme", document.body.className);
+}
+document.body.className = localStorage.getItem("theme") || "";
+</script>
+
+</body>
+</html>
